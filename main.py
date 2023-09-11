@@ -10,6 +10,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from sqlalchemy.orm import relationship
 from forms import CreatePostForm, RegisterForm, LoginForm, CommentForm
 from decouple import config
+import os
 # Optional: add contact me email functionality (Day 60)
 # import smtplib
 
@@ -54,7 +55,7 @@ gravatar = Gravatar(app,
                     base_url=None)
 
 # CONNECT TO DB
-app.config['SQLALCHEMY_DATABASE_URI'] = config("DATABASE_URI")
+app.config['SQLALCHEMY_DATABASE_URI'] = config("DB_URI", "sqlite:///posts.db")
 db = SQLAlchemy()
 db.init_app(app)
 
